@@ -1,7 +1,7 @@
 <<<<<<< HEAD
-# analyzer-RNA-front
+# hackathon-QHay
 =======
-# AM-front
+# QHay
 
 This template should help get you started developing with Vue 3 in Vite.
 
