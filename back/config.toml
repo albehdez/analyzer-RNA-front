@@ -1,0 +1,42 @@
+# Keys
+title = "etl_blue_diamond"
+version = "v1.0"
+env = "dev"
+API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiNmNlM2JjYTUtMGVkYy00NTkyLTk2MmQtOTk3NWY3NDM5MjNmIiwiZXhwIjoxNzk4Njc1MjAwfQ.Rptjbe2yBztklCzXWggX6dPATQOHyA44KnFOGFskIWY'
+TELEGRAM_API_ID='24800144'
+TELEGRAM_API_HASH='891e08c855d3bc2a5ea577cbfa2ccd25'
+
+[paths]
+  data = "data"
+  raw_data = "raw"
+  clean_data = "clean"
+  hotel_data = "Avangenio-BDR Hoteles.csv"
+
+[dwh]
+  [dwh.dev]
+    database = "dhw_demo_de"
+    host = "51.79.102.5"
+    user_name = "dwh_ingestion"
+    password = "bBHy5fDtaE!3rNM2123443412fd*"
+    JDBC_url = "jdbc:postgresql://51.79.102.5:5433/dhw_hoteles"
+    schema_name = "mod_demo"
+    port = "5433"
+    driver = "org.postgresql.Driver"
+  [dwh.production]
+    database = "dwh_hoteles"
+    host = "15.235.44.208"
+    user_name = "dwh_ingestion"
+    password = "bBHy5fDtaE!3rNM2123443412fd*"
+    JDBC_url = "jdbc:postgresql://15.235.44.208:5432/dwh_hoteles"
+    schema_name = "mod_hotel"
+    port = "5432"
+    driver = "org.postgresql.Driver"
+  [dwh.local]
+    database = "dwh_hoteles"
+    host = "192.168.11.57"
+    user_name = "root"
+    password = "root"
+    JDBC_url = "jdbc:postgresql://172.17.0.1:5060/dwh_hoteles"
+    schema_name = "mod_hotel"
+    port = "5060"
+    driver = "org.postgresql.Driver"

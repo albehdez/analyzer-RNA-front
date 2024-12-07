@@ -6,7 +6,7 @@
     <div class="details">
       <h3>
         <slot name="heading"></slot>
-      </h3>
+      </h3>zs
       <slot></slot>
     </div>
   </div>
