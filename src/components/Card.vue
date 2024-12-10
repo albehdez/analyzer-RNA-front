@@ -30,7 +30,7 @@ export default defineComponent({
     price: Number,
     tendency: {
       type: Number,
-      default: undefined,
+      default: null,
     },
     selected: Boolean,
   },

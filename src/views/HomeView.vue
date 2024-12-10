@@ -1,120 +1,81 @@
-<!-- <script setup lang="ts">
-import { ref, computed } from 'vue'
-import ProductCard from '../components/Card.vue'
-
-const products = ref([
-  {
-    item: 'azucar',
-    price: 340.0,
-    coordinates: { lat: 33.749, lng: -84.388 },
-    municipality: '10 de octubre, Lawton',
-    tendency: 23,
-  },
-  {
-    item: 'pollo',
-    price: 100.5,
-    coordinates: { lat: 25.7617, lng: -80.1918 },
-    municipality: 'La Habana, Cuba',
-    tendency: -12,
-  },
-])
-
-const selectedProduct = ref(null)
-const productLooking = ref('')
-const filteredProduct = ref(products.value)
-
-const iframeUrl = ref(
-  'https://tablero-qtal.avangenio.com/d-solo/fe65dynep23nke/productos?orgId=1&from=1730433600000&to=1735707599000&panelId=2',
-)
-
-const productsToDisplay = computed(() => {
-  return filteredProduct.value
-})
-
-const selectProduct = (product: any) => {
-  selectedProduct.value = product
-  iframeUrl.value = `https://tablero-qtal.avangenio.com/d-solo/fe65dynep23nke/productos?orgId=1&from=1730433600000&to=1735707599000&panelId=2&var-Producto=${product.item}`
-}
-
-const searchProduct = () => {
-  if (!productLooking.value.trim().length) {
-    filteredProduct.value = [...products.value]
-  } else {
-    const results = products.value.filter(product =>
-      product.item.toLowerCase().includes(productLooking.value.toLowerCase()),
-    )
-    filteredProduct.value = results
-  }
-}
-
-const loading = ref(true)
-
-setTimeout(() => {
-  loading.value = false
-}, 1000)
-</script> -->
-
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue'
-import ProductCard from '../components/Card.vue'
+import { ref, computed, onMounted } from 'vue';
+import ProductCard from '../components/Card.vue';
 
-const products = ref([])
-const filteredProduct = ref([])
-const selectedProduct = ref(null)
-const productLooking = ref('')
-const loading = ref(true)
+interface Product {
+  item: string;
+  price: number;
+  coordinates: { lat: number; lng: number };
+  municipality: string;
+  tendency: number;
+}
+
+interface Value {
+  word: string;
+  avg: string;
+  trend: string;
+}
+
+const products = ref<Product[]>([]);
+const filteredProduct = ref<Product[]>([]);
+const selectedProduct = ref<Product | null>(null);
+const productLooking = ref('');
+const loading = ref(true);
 
 const iframeUrl = ref(
   'https://tablero-qtal.avangenio.com/d-solo/fe65dynep23nke/productos?orgId=1&from=1730433600000&to=1735707599000&panelId=2&var-Producto= ',
-)
+);
 
+// Función para obtener los productos
 const fetchProducts = async () => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/words')
+    const response = await fetch('http://127.0.0.1:8000/words');
     if (!response.ok) {
-      throw new Error('Error al obtener los productos')
+      throw new Error('Error al obtener los productos');
     }
-    const data = await response.json()
-    // Transformamos los datos al formato esperado
-    products.value = data.map(item => ({
+    const data = await response.json();
+    products.value = data.map((item: Value) => ({
       item: item.word,
       price: item.avg,
       coordinates: { lat: 0, lng: 0 },
       municipality: 'Sin municipio',
       tendency: item.trend,
-    }))
-    filteredProduct.value = [...products.value]
+    }));
+    filteredProduct.value = [...products.value];
   } catch (error) {
-    console.error('Error al cargar los productos:', error)
+    console.error('Error al cargar los productos:', error);
   } finally {
-    loading.value = false
+    loading.value = false;
   }
-}
+};
 
-const productsToDisplay = computed(() => {
-  return filteredProduct.value
-})
+// Computed para los productos a mostrar
+const productsToDisplay = computed<Product[]>(() => {
+  return filteredProduct.value;
+});
 
-const selectProduct = (product: any) => {
-  selectedProduct.value = product
-  iframeUrl.value = `https://tablero-qtal.avangenio.com/d-solo/fe65dynep23nke/productos?orgId=1&from=1730433600000&to=1735707599000&panelId=2&var-Producto=${product.item}`
-}
+// Función para seleccionar un producto
+const selectProduct = (product: Product) => {
+  selectedProduct.value = product;
+  iframeUrl.value = `https://tablero-qtal.avangenio.com/d-solo/fe65dynep23nke/productos?orgId=1&from=1730433600000&to=1735707599000&panelId=2&var-Producto=${product.item}`;
+};
 
+// Función para buscar un producto
 const searchProduct = () => {
   if (!productLooking.value.trim().length) {
-    filteredProduct.value = [...products.value]
+    filteredProduct.value = [...products.value];
   } else {
     const results = products.value.filter(product =>
       product.item.toLowerCase().includes(productLooking.value.toLowerCase()),
-    )
-    filteredProduct.value = results
+    );
+    filteredProduct.value = results;
   }
-}
+};
 
-// Llamamos a `fetchProducts` al montar el componente
+// Llamamos a fetchProducts al montar el componente
 onMounted(() => {
-  fetchProducts()
-})
+  fetchProducts();
+});
 </script>
 
 <template>
@@ -172,7 +133,6 @@ main {
   grid-template-columns: 0.7fr 2fr;
   background-color: #f5f5f5;
   padding: 10px 20px;
-  /* border-radius: 37px 0 0 37px; */
 }
 
 #map-section {
@@ -217,7 +177,6 @@ main {
 .selected-card {
   border-left: 4px solid #4caf50;
   border-radius: 8px;
-  /* background-color: #e8f5e9; */
   transition: 0.3s ease-in-out;
 }
 
