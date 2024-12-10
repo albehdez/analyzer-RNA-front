@@ -23,7 +23,6 @@ onMounted(() => {
   products.value = ['Producto 1', 'Producto 2', 'Producto 3', 'Producto 4']
 })
 
-let cantProduct = 23
 
 // const countries = ref()
 const selectedProduct = ref()

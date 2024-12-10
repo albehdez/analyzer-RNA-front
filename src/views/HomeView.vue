@@ -29,7 +29,7 @@ const iframeUrl = ref(
 // Función para obtener los productos
 const fetchProducts = async () => {
   try {
-    const response = await fetch('http://192.168.11.57:8000/words');
+    const response = await fetch('https://api.qhayhackaton.avangenio.com/words');
     if (!response.ok) {
       throw new Error('Error al obtener los productos');
     }
@@ -178,7 +178,7 @@ main {
 .selected-card {
   border-left: 4px solid #4caf50;
   border-radius: 8px;
-  transition: 0.3s ease-in-out;
+  /* transition: 0.3s ease-in-out; */
 }
 
 .no-results {
