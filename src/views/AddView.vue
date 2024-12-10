@@ -163,6 +163,7 @@ const submitProduct = () => {
 .analisys-section {
   background-color: #f5f5f5;
   padding: 10px 20px;
+  height: 100%;
   /* min-height: 100vh;
   display: flex;
   flex-direction: column;

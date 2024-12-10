@@ -17,6 +17,7 @@ import ChatBot from '../components/ChatBot.vue'
   background-color: #f5f5f5;
   padding: 10px 20px;
   min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

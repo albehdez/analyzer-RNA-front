@@ -125,31 +125,39 @@ import { RouterLink, RouterView } from 'vue-router'
         </RouterLink>
       </nav>
     </header>
-
+  <div class="pueba" >
     <RouterView />
+  </div>
   </div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
 #principal {
   display: grid;
-  grid-template-columns: 0.4fr 2fr;
-  /* width: 100vw; */
-  height: 100vh;
+  grid-template-columns: 0.2fr 1fr; /* La primera columna ocupa menos espacio que la segunda */
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; 
 }
 
 nav {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+.pueba {
+  overflow-y: auto; 
+  background-color: #ffffff; 
 }
 
 .logo {
   justify-self: center;
+  align-self: center;
   margin: 20px;
 }
 

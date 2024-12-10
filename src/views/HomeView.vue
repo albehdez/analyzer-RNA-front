@@ -133,6 +133,7 @@ main {
   grid-template-columns: 0.7fr 2fr;
   background-color: #f5f5f5;
   padding: 10px 20px;
+  height: 100%;
 }
 
 #map-section {

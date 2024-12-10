@@ -27,6 +27,7 @@
 .analisys-section {
   background-color: #f5f5f5;
   padding: 10px 20px;
+  height: 100%;
 }
 
 .graphs-analisys {
