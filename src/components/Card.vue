@@ -5,7 +5,7 @@
     @click="$emit('select')"
   >
     <div class="header">
-      <span class="item-name">{{ item }}</span>
+      <span class="item-name">{{ item === 'azucar' ? 'azúcar' : item }}</span>
     </div>
     <div class="details">
       <span class="price">
@@ -20,8 +20,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { computed, defineComponent } from 'vue'
+
+export default defineComponent({
   name: 'ProductCard',
   props: {
     item: String,
@@ -32,21 +34,25 @@ export default {
     },
     selected: Boolean,
   },
-  computed: {
-    tendencyClass() {
-      return {
-        'tendency-positive': this.tendency < 0,
-        'tendency-negative': this.tendency > 0,
-        'tendency-neutral': this.tendency === 0,
-      }
-    },
-    tendencyIcon() {
-      if (this.tendency > 0) return '▲'
-      if (this.tendency < 0) return '▼'
+  setup(props) {
+    const tendencyClass = computed(() => ({
+      'tendency-positive': props.tendency < 0,
+      'tendency-negative': props.tendency > 0,
+      'tendency-neutral': props.tendency === 0,
+    }))
+
+    const tendencyIcon = computed(() => {
+      if (props.tendency > 0) return '▲'
+      if (props.tendency < 0) return '▼'
       return '-'
-    },
+    })
+
+    return {
+      tendencyClass,
+      tendencyIcon,
+    }
   },
-}
+})
 </script>
 
 <style scoped>
