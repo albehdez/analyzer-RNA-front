@@ -29,7 +29,7 @@ const iframeUrl = ref(
 // Función para obtener los productos
 const fetchProducts = async () => {
   try {
-    const response = await fetch('http://127.0.0.1:8000/words');
+    const response = await fetch('http://192.168.11.57:8000/words');
     if (!response.ok) {
       throw new Error('Error al obtener los productos');
     }
